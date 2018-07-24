@@ -4,6 +4,8 @@ var Enemy = function(x,y, speed) {
     // we've provided one for you to get started
         this.x = x;
         this.y = y;
+        this.w = 75;
+        this.h = 50;
         this.speed = speed;
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
@@ -40,7 +42,10 @@ Enemy.prototype.render = function() {
 var player1 = function(x, y){
     this.x = x;
     this.y = y;
+    this.w = 50;
+    this.h = 75;
     this.sprite = 'images/char-boy.png';
+
 };
 
 var player = new player1(200,300);
@@ -48,16 +53,24 @@ var player = new player1(200,300);
 
 // Place all enemy objects in an array called allEnemies
 var enemy1 = new Enemy(-100, 60, 200);
-
+var enemy2 = new Enemy(-100, 140, 500);
+var enemy3 = new Enemy(-100, 210, 100);
 
 var allEnemies = [];
 allEnemies.push(enemy1);
+allEnemies.push(enemy2);
+allEnemies.push(enemy3);
 
 // Place the player object in a variable called player
 
 
 player.update = function(dt) {
-};
+  if (this.y <= -12.5){
+         this.reset();
+      }
+
+      this.checkCollisions();
+  };
 player1.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
@@ -92,3 +105,21 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+
+
+player1.prototype.checkCollisions = function(){
+  if (Enemy.x < player.x + player.w &&
+         Enemy.x + Enemy.w > player.x &&
+         Enemy.y < player.y + player.h &&
+         Enemy.h + Enemy.y > player.y) {
+         // collision detected!
+         this.reset();
+
+     }
+}
+
+player1.prototype.reset = function (){
+      this.x = 200;
+      this.y = 300;
+}
