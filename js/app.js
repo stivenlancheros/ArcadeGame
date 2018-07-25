@@ -4,8 +4,8 @@ var Enemy = function(x,y, speed) {
     // we've provided one for you to get started
         this.x = x;
         this.y = y;
-        this.w = 75;
-        this.h = 50;
+        this.w = 50;
+        this.h = 20;
         this.speed = speed;
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
@@ -14,7 +14,7 @@ var Enemy = function(x,y, speed) {
 
 var high;
 var speed = 100;
-var lowSpeed = 65;
+
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -43,33 +43,38 @@ var player1 = function(x, y){
     this.x = x;
     this.y = y;
     this.w = 50;
-    this.h = 75;
+    this.h = 40;
     this.sprite = 'images/char-boy.png';
 
 };
 
-var player = new player1(200,300);
+var player = new player1(200,400);
 // Now instantiate your objects.
 
 // Place all enemy objects in an array called allEnemies
-var enemy1 = new Enemy(-100, 60, 200);
-var enemy2 = new Enemy(-100, 140, 500);
-var enemy3 = new Enemy(-100, 210, 100);
+var enemy1 = new Enemy(-100, 60, (Math.random()*400));
+var enemy2 = new Enemy(-100, 140, (Math.random()*500));
+var enemy3 = new Enemy(-100, 220, (Math.random()*600));
+var enemy4 = new Enemy(-600, 150, (Math.random()*200));
+var enemy5 = new Enemy(-900, 60, (Math.random()*400));
 
 var allEnemies = [];
 allEnemies.push(enemy1);
 allEnemies.push(enemy2);
 allEnemies.push(enemy3);
-
+allEnemies.push(enemy4);
+allEnemies.push(enemy5);
 // Place the player object in a variable called player
 
 
 player.update = function(dt) {
   if (this.y <= -12.5){
          this.reset();
-      }
 
+      }
       this.checkCollisions();
+
+
   };
 player1.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -107,19 +112,21 @@ document.addEventListener('keyup', function(e) {
 });
 
 
+player1.prototype.checkCollisions = function() {
+    for (i = 0; i < allEnemies.length; i++)
+        if (player.x < allEnemies[i].x + allEnemies[i].w  &&
+            player.x + player.w > allEnemies[i].x &&
+            player.y < allEnemies[i].y + allEnemies[i].h &&
+            player.h + player.y > allEnemies[i].y){
 
-player1.prototype.checkCollisions = function(){
-  if (Enemy.x < player.x + player.w &&
-         Enemy.x + Enemy.w > player.x &&
-         Enemy.y < player.y + player.h &&
-         Enemy.h + Enemy.y > player.y) {
-         // collision detected!
-         this.reset();
+            player.reset();
 
-     }
-}
+        }
+};
+
+
 
 player1.prototype.reset = function (){
       this.x = 200;
-      this.y = 300;
+      this.y = 400;
 }
