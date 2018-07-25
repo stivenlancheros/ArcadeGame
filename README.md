@@ -1,6 +1,13 @@
-frontend-nanodegree-arcade-game
-===============================
+Arcade Game clone
 
-Students should use this [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) for self-checking their submission. Make sure the functions you write are **object-oriented** - either class functions (like Player and Enemy) or class prototype functions such as Enemy.prototype.checkCollisions, and that the keyword 'this' is used appropriately within your class and class prototype functions to refer to the object the function is called upon. Also be sure that the **readme.md** file is updated with your instructions on both how to 1. Run and 2. Play your arcade game.
+This code refers to the Classic Arcade Game Clone project, next some of the steps taken to complete the tasks only in Javascript:
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+1. Created the player1 variable, in order to define the both actors in the game and afterwards using constructor functions instatiate the objects.
+2. Both objects have some elements helpful for the location in the game and the collision function and also the image.
+3. The new objects built with contructors Enemy use a math.random() function to choose randomly the speed of the enemies in the game
+4. Each enemy has the value of x, y and a radom speed in order to be pushed into the array.
+5. handleInput function helps the player get out of the game
+6.CheckCollisions function help reset the player position in case of collision with any enemy.
+7.Reset() set the location to default if called.
+
+Best regards,
