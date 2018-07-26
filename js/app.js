@@ -1,4 +1,5 @@
 // Enemies our player must avoid
+"use strict";
 var Enemy = function(x,y, speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
@@ -112,15 +113,18 @@ document.addEventListener('keyup', function(e) {
 });
 
 
-player1.prototype.checkCollisions = function() {
+
+player1.prototype.checkCollisions = function collide() {
+var  i = 0
     for (i = 0; i < allEnemies.length; i++)
-        if (player.x < allEnemies[i].x + allEnemies[i].w  &&
-            player.x + player.w > allEnemies[i].x &&
-            player.y < allEnemies[i].y + allEnemies[i].h &&
-            player.h + player.y > allEnemies[i].y){
+
+        if (this.x < allEnemies[i].x + allEnemies[i].w  &&
+            this.x + this.w > allEnemies[i].x &&
+            this.y < allEnemies[i].y + allEnemies[i].h &&
+            this.h + this.y > allEnemies[i].y){
 
             player.reset();
-
+            collide.call(player);
         }
 };
 
