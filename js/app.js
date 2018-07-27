@@ -1,5 +1,8 @@
 // Enemies our player must avoid
 "use strict";
+var TILE_WIDTH = 101,
+    TILE_HEIGHT = 83;
+
 var Enemy = function(x,y, speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
@@ -40,7 +43,7 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 
-var player1 = function(x, y){
+var Player1 = function(x, y){
     this.x = x;
     this.y = y;
     this.w = 50;
@@ -49,7 +52,7 @@ var player1 = function(x, y){
 
 };
 
-var player = new player1(200,400);
+var player = new Player1(200,400);
 // Now instantiate your objects.
 
 // Place all enemy objects in an array called allEnemies
@@ -77,7 +80,7 @@ player.update = function(dt) {
 
 
   };
-player1.prototype.render = function() {
+Player1.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 // This listens for key presses and sends the keys to your
@@ -114,7 +117,7 @@ document.addEventListener('keyup', function(e) {
 
 
 
-player1.prototype.checkCollisions = function collide() {
+Player1.prototype.checkCollisions = function collide() {
 var  i = 0
     for (i = 0; i < allEnemies.length; i++)
 
@@ -123,14 +126,14 @@ var  i = 0
             this.y < allEnemies[i].y + allEnemies[i].h &&
             this.h + this.y > allEnemies[i].y){
 
-            player.reset();
+            this.reset();
             collide.call(player);
         }
 };
 
 
 
-player1.prototype.reset = function (){
+Player1.prototype.reset = function (){
       this.x = 200;
       this.y = 400;
 }
